@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #008080;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    overflow: hidden; /* Prevent scrolling */
+    position: relative; /* Ensure body is relative for absolute positioning of canvas */
+}
+
+.container {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+button {
+    padding: 20px 40px;
+    font-size: 22px;
+    cursor: pointer;
+    background-color: #ff69b4;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #ff1493;
+}
+
+.hidden {
+    display: none;
+}
+
+.cake {
+    position: relative;
+    width: 240px;
+    margin: 20px auto;
+    transition: transform 0.5s;
+}
+
+.cake .plate {
+    width: 240px;
+    height: 30px;
+    background-color: #ddd;
+    border-radius: 50%;
+}
+
+.cake .layer {
+    position: absolute;
+    width: 240px;
+    height: 60px;
+    background-color: #ffcc99;
+    border-radius: 8px 8px 0 0;
+}
+
+.cake .layer.top {
+    background-color: #ffb3b3;
+    top: 0;
+    z-index: 3;
+}
+
+.cake .layer.middle {
+    background-color: #ff6666;
+    top: 45px;
+    z-index: 2;
+}
+
+.cake .layer.bottom {
+    background-color: #ff3333;
+    top: 90px;
+    z-index: 1;
+}
+
+.candle {
+    position: absolute;
+    top: -45px;
+    left: 50%;
+    width: 15px;
+    height: 60px;
+    background-color: #ffffff;
+    border: 2px solid #228B22;
+    transform: translateX(-50%);
+    border-radius: 5px;
+    background-image: linear-gradient(45deg, #ffffff 25%, #228B22 25%, #228B22 50%, #ffffff 50%, #ffffff 75%, #228B22 75%, #228B22 100%);
+    background-size: 20px 20px;
+}
+
+.flame {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    width: 20px;
+    height: 40px;
+    background-color: orange;
+    border-radius: 50% 50% 0 0;
+    transform: translateX(-50%);
+    animation: flicker 0.2s infinite alternate;
+}
+
+.flame:before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    width: 14px;
+    height: 20px;
+    background-color: yellow;
+    border-radius: 50% 50% 0 0;
+    transform: translateX(-50%);
+}
+
+.flame:after {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    animation: flicker-inner 0.1s infinite alternate;
+}
+
+@keyframes flicker {
+    0% { transform: translateX(-50%) scaleY(1); }
+    100% { transform: translateX(-50%) scaleY(0.8); }
+}
+
+@keyframes flicker-inner {
+    0% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+.message {
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    margin-top: 180px;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.show-cake .cake {
+    transform: translateY(0);
+}
+
+.show-cake .message {
+    opacity: 1;
+}
+
+#confetti-canvas {
+    position: fixed; /* Ensure canvas is fixed to cover the entire screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allow clicks to pass through */
+    z-index: 0;
+}
